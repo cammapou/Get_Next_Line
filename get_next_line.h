@@ -6,7 +6,7 @@
 /*   By: cammapou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:47:57 by cammapou          #+#    #+#             */
-/*   Updated: 2018/01/03 17:10:22 by cammapou         ###   ########.fr       */
+/*   Updated: 2018/01/05 15:01:39 by cammapou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # define BUF_SIZE 400
+
 # include "./Libft/libft.h"
 
 int		ft_get_next_line(const int fd, char **line);
