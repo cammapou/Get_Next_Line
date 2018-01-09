@@ -1,3 +1,3 @@
-Le second paramètre est l’adresse d’un pointeur sur caractère qui servira à stocker
+Le second parametre est ladresse dun pointeur sur caractere qui servira a stocker
 la ligne lue sur le file descriptor.
 Un appel en boucle à votre fonction get_next_line permettra donc de lire le texte disponible sur un descripteur de fichier une ligne à la fois jusqu’à la fin du texte, quelque soit la taille du texte en question ou d’une de ses lignes.
