@@ -36,7 +36,7 @@
  **
  ** • On considère également qu’un appel à la fonction lseek(2) n’aura jamais lieu entre deux appels à get_next_line sur un même descripteur de fichier.
  **
- ** • On considère enfin que get_next_line a un comportement indeterminé en cas de lecture dans un fichier binaire. Cependant, si vous le souhaitez, 
+ ** • On considère enfin que get_next_line a un comportement indeterminé́ en cas de lecture dans un fichier binaire. Cependant, si vous le souhaitez, 
  ** vous pouvez rendre ce comportement cohérent.
  **
  ** • Les variables globales sont interdites.
@@ -44,26 +44,56 @@
  ** • Les variables statiques sont autorisées.
  **
  ** test des leaks faire une boucle infinie dans le main avant le return et executer le programe avec leaks a.out par exemple.
+ ** 
+ **	----------------------------------------------------------------------------------------------------------------------------------------
+ **
+ ** 													MON PROGRAMME GET NEXT LINE 
+ **
+ **	1. Controler si les variable sont bien initialiser ou qu'il a une valuer dedans, remplissage du buffer avec 0.
+ ** 
+ ** 2. Je crée un emplacement de memoire dynamique pour le char **line pour permettre de copier buf dans line si l'alllocation echoue ma condition renvois 0.
+ ** 
+ ** 3. Je crée une boucle pour lire le fichier j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
+ ** 
+ ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line caractere par caractere (faire attention au fuites memoire par la suite 
+ ** 	retrouver la tête pour pouvoir la free).
+ **	 
+ **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre a ma boucle de s'arreter a la rencontre
+ **	   d'un retour a la ligne je quitte avec "break" .
+ **	
+ **	6. Je dois récupérer le reste qui a été lus et enregistrer dans ligne et le placé dans une variable static de type char.  
+ ** 
+ ** 7 .
+ ** 
+ **
+ **
  */
+
 
 int		get_next_line(const int fd, char **line)
 {
 	char			buf[BUF_SIZE + 1];
-	static char		**tmp;
+	static char		*tmp;
 	int ret;
+	int i;
 
-	ft_bzero(buf, BUF_SIZE);
-	if (!line || !fd || read(fd, buf, BUF_SIZE == -1))
+	i = 0;
+	if (!line || fd < 0)
 		return (-1);
-	if ((*line = (char *)malloc(sizeof(char) * BUF_SIZE)) == NULL)
+	ft_bzero(buf, BUF_SIZE);
+	if ((*line = (char *)malloc(sizeof(char) * 1)) == NULL)
 		return (0);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
+		*line = ft_strjoin(*line, buf);
 		if (ft_strchr(buf, '\n'))
 			break;
-		*line = ft_strjoin(*line, buf);
-		return (1);
 	}
-	ft_strdel(line);
+	while (line[i])
+	{
+		if (line[i] == '\n')
+			tmp = *line;
+	}
+	printf("tmp = |%s|\n", tmp);
 	return (0);
 }
