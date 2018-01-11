@@ -76,7 +76,7 @@ int		get_next_line(const int fd, char **line)
 	char			buf[BUF_SIZE + 1];
 	static char		*rest;
 	int ret;
-	char i;
+	int i;
 	int j;
 
 	j = 0;
@@ -96,8 +96,11 @@ int		get_next_line(const int fd, char **line)
 	while (line[i])
 	{
 		rest = ft_strchr(*line, '\n') + 1;
+		//if (*line = ft_strchr(*line, '\n'))
 		i++;
 	}
+
 	printf("tmp = |%s|\n", rest);
+	//printf("line = |%s|\n", *line);
 	return (0);
 }
