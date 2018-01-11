@@ -49,21 +49,22 @@
  **
  ** 													MON PROGRAMME GET NEXT LINE 
  **
- **	1. Controler si les variable sont bien initialiser ou qu'il a une valuer dedans, remplissage du buffer avec 0.
+ **	1. Controler si les variable sont bien initialiser, vérifier le fd, remplissage du buffer avec '\0'.
  ** 
- ** 2. Je crée un emplacement de memoire dynamique pour le char **line pour permettre de copier buf dans line si l'alllocation echoue ma condition renvois 0.
+ ** 2. Crée une allocation dynamique de mémoire pour le char **line pour permettre de copier buf dans line si l'alllocation 
+ **	   echoue ma condition renvois 0.
  ** 
- ** 3. Je crée une boucle pour lire le fichier j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
+ ** 3. Je crée une boucle pour lire le fichier, j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
  ** 
- ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line caractere par caractere (faire attention au fuites memoire par la suite 
- ** 	retrouver la tête pour pouvoir la free).
+ ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line 
+ **    caractere par caractere (faire attention au fuites memoire par la suite retrouver la tête pour pouvoir la free).
  **	 
- **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre a ma boucle de s'arreter a la rencontre
- **	   d'un retour a la ligne je quitte avec "break" .
+ **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre 
+ **	   a ma boucle de s'arreter a la rencontre d'un retour a la ligne je quitte avec "break" .
  **	
  **	6. Je dois récupérer le reste qui a été lus et enregistrer dans ligne et le placé dans une variable static de type char.  
  ** 
- ** 7 .
+ ** 7 . 
  ** 
  **
  **
@@ -73,10 +74,12 @@
 int		get_next_line(const int fd, char **line)
 {
 	char			buf[BUF_SIZE + 1];
-	static char		*tmp;
+	static char		*rest;
 	int ret;
-	int i;
+	char i;
+	int j;
 
+	j = 0;
 	i = 0;
 	if (!line || fd < 0)
 		return (-1);
@@ -86,14 +89,15 @@ int		get_next_line(const int fd, char **line)
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		*line = ft_strjoin(*line, buf);
-		if (ft_strchr(buf, '\n'))
+		if (ft_strchr(buf, '\n'))	
 			break;
 	}
+	//line[i][j] = '\0';
 	while (line[i])
 	{
-		if (line[i] == '\n')
-			tmp = *line;
+		rest = ft_strchr(*line, '\n') + 1;
+		i++;
 	}
-	printf("tmp = |%s|\n", tmp);
+	printf("tmp = |%s|\n", rest);
 	return (0);
 }
