@@ -71,20 +71,26 @@
  */
 
 
+
+/*void	ft_allocation_memorie(char *line, static char *rest)
+{
+
+}*/
+
 int		get_next_line(const int fd, char **line)
 {
 	char			buf[BUF_SIZE + 1];
 	static char		*rest;
 	int ret;
 	int i;
-	int j;
 
-	j = 0;
 	i = 0;
 	if (!line || fd < 0)
 		return (-1);
 	ft_bzero(buf, BUF_SIZE);
 	if ((*line = (char *)malloc(sizeof(char) * 1)) == NULL)
+		return (0);
+	if ((rest = (char *)malloc(sizeof(char) * ft_strlen(*line) + 1)) == NULL)
 		return (0);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
@@ -93,12 +99,8 @@ int		get_next_line(const int fd, char **line)
 			break;
 	}
 	//line[i][j] = '\0';
-	while (line[i])
-	{
+	while (line[i++])
 		rest = ft_strchr(*line, '\n') + 1;
-		//if (*line = ft_strchr(*line, '\n'))
-		i++;
-	}
 
 	printf("tmp = |%s|\n", rest);
 	//printf("line = |%s|\n", *line);
