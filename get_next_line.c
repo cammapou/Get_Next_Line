@@ -47,34 +47,45 @@
  ** 
  **	----------------------------------------------------------------------------------------------------------------------------------------
  **
- ** 													MON PROGRAMME GET NEXT LINE 
+ ** 							MON PROGRAMME GET NEXT LINE 
  **
- **	1. Controler si les variable sont bien initialiser, vérifier le fd, remplissage du buffer avec '\0'.
+ **	1. Controler si les variable sont bien initialiser ou qu'il a une valuer dedans, remplissage du buffer avec 0.
  ** 
- ** 2. Crée une allocation dynamique de mémoire pour le char **line pour permettre de copier buf dans line si l'alllocation 
- **	   echoue ma condition renvois 0.
+ ** 2. Je crée un emplacement de memoire dynamique pour le char **line pour permettre de copier buf dans line si l'alllocation echoue ma condition renvois 0.
  ** 
- ** 3. Je crée une boucle pour lire le fichier, j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
+ ** 3. Je crée une boucle pour lire le fichier j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
  ** 
- ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line 
- **    caractere par caractere (faire attention au fuites memoire par la suite retrouver la tête pour pouvoir la free).
+ ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line caractere par caractere (faire attention au fuites memoire par la suite 
+ ** 	retrouver la tête pour pouvoir la free).
  **	 
- **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre 
- **	   a ma boucle de s'arreter a la rencontre d'un retour a la ligne je quitte avec "break" .
+ **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre a ma boucle de s'arreter a la rencontre
+ **	   d'un retour a la ligne je quitte avec "break" .
  **	
  **	6. Je dois récupérer le reste qui a été lus et enregistrer dans ligne et le placé dans une variable static de type char.  
  ** 
- ** 7 . 
+ ** 7 .Géré les differentes variation de BUF_SIZE (soucis sur la taille de l'allocation)
+ **
+ ** 8. extraire le rest de la variable "rest" est le revoyer (?) XXXII-G-2. Comportement interne fgets :
+ **
+ **	   Les caractères saisis sont stockés dans le flux stdin. Lorsque l'on frappe la touche <enter>, le caractère '\n' est aussi placé dans stdin, 
+ **	
+ **	   et l'exécution reprend. Le caractère le plus ancien est alors extrait du flux et il est retourné. En cas d'erreur de lecture ou d'entrée 
+ **
+ **	   d'un caractère spécial dit 'de fin de fichier' la valeur EOF (int < 0) est retournée.
+ **
+ **    Ensuite, si on rappelle fgetc(), deux cas sont possibles. Soit le flux est vide, soit il ne l'est pas. Si le flux est vide, 
  ** 
+ **    la fonction fgetc() suspend l'exécution, et on retrouve le comportement précédent. S'il n'est pas vide, l'exécution n'est pas suspendue, 
+ **
+ **    et le caractère le plus ancien est extrait et retourné.
+ ** 
+ **	   Dans la grande majorité des cas la lecture du '\n' signifie que la ligne saisie a été complètement lue.
  **
  **
  */
 
-
-
 /*void	ft_allocation_memorie(char *line, static char *rest)
 {
-
 }*/
 
 int 	ft_len_line(char *line)
