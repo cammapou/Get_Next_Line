@@ -77,34 +77,46 @@
 
 }*/
 
+int 	ft_len_line(char *line)
+{
+	int i;
+	int len;
+
+	i = 0;
+	len = ft_strlen(line);
+	while (--len > 0)
+	{
+		if (line[len] == '\n')
+			break;
+		i++;
+	}
+	return (i);
+}
+
 int		get_next_line(const int fd, char **line)
 {
-	char			buf[BUF_SIZE + 1];
+	char			buff[BUFF_SIZE + 1];
 	static char		*rest;
 	int ret;
 	int i;
 
 	i = 0;
-	if (!line || fd < 0)
+	ret = 0;
+	if (!line || fd < 0 || BUFF_SIZE < 0 || ret < 0)
 		return (-1);
-	ft_bzero(buf, BUF_SIZE);
-	rest = NULL;
-	if ((*line = (char *)malloc(sizeof(char) * 1)) == NULL)
-		return (0);
-	if ((rest = (char *)malloc(sizeof(char) * BUF_SIZE)) == NULL)
-		return (0);
-	while ((ret = read(fd, buf, BUF_SIZE)))
+	ft_bzero(buff, BUFF_SIZE);
+	*line = ft_strnew(BUFF_SIZE);
+	rest = ft_strnew(ft_len_line(*line));
+	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
-		*line = ft_strjoin(*line, buf);
-		printf("buf = |%s|\n", buf);
-		if (ft_strchr(buf, '\n'))
+		buff[ret] = '\0';
+		*line = ft_strjoin(*line, buff);
+		if (ft_strchr(buff, '\n'))
 			break;
 	}
+	ft_len_line(*line);
 	rest = ft_strchr(*line, '\n') + 1;
 	*line = *ft_strsplit(*line, '\n');
-	
-
 	printf("rest = |%s|\n", rest);
-	printf("line = |%s|\n", *line);
 	return (0);
 }
