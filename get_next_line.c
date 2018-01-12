@@ -88,21 +88,23 @@ int		get_next_line(const int fd, char **line)
 	if (!line || fd < 0)
 		return (-1);
 	ft_bzero(buf, BUF_SIZE);
+	rest = NULL;
 	if ((*line = (char *)malloc(sizeof(char) * 1)) == NULL)
 		return (0);
-	if ((rest = (char *)malloc(sizeof(char) * ft_strlen(*line) + 1)) == NULL)
+	if ((rest = (char *)malloc(sizeof(char) * BUF_SIZE)) == NULL)
 		return (0);
 	while ((ret = read(fd, buf, BUF_SIZE)))
 	{
 		*line = ft_strjoin(*line, buf);
-		if (ft_strchr(buf, '\n'))	
+		printf("buf = |%s|\n", buf);
+		if (ft_strchr(buf, '\n'))
 			break;
 	}
-	//line[i][j] = '\0';
-	while (line[i++])
-		rest = ft_strchr(*line, '\n') + 1;
+	rest = ft_strchr(*line, '\n') + 1;
+	*line = *ft_strsplit(*line, '\n');
+	
 
-	printf("tmp = |%s|\n", rest);
-	//printf("line = |%s|\n", *line);
+	printf("rest = |%s|\n", rest);
+	printf("line = |%s|\n", *line);
 	return (0);
 }
