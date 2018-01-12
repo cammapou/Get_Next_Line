@@ -80,7 +80,7 @@
  **    et le caractère le plus ancien est extrait et retourné.
  ** 
  **	   Dans la grande majorité des cas la lecture du '\n' signifie que la ligne saisie a été complètement lue.
- **
+ **	   http://emmanuel-delahaye.developpez.com/tutoriels/c/notes-langage-c/?page=Page6
  **
  */
 
