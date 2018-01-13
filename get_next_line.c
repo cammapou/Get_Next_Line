@@ -67,19 +67,7 @@
  **
  ** 8. extraire le rest de la variable "rest" est le revoyer (?) XXXII-G-2. Comportement interne fgets :
  **
- **	   Les caractères saisis sont stockés dans le flux stdin. Lorsque l'on frappe la touche <enter>, le caractère '\n' est aussi placé dans stdin, 
  **	
- **	   et l'exécution reprend. Le caractère le plus ancien est alors extrait du flux et il est retourné. En cas d'erreur de lecture ou d'entrée 
- **
- **	   d'un caractère spécial dit 'de fin de fichier' la valeur EOF (int < 0) est retournée.
- **
- **    Ensuite, si on rappelle fgetc(), deux cas sont possibles. Soit le flux est vide, soit il ne l'est pas. Si le flux est vide, 
- ** 
- **    la fonction fgetc() suspend l'exécution, et on retrouve le comportement précédent. S'il n'est pas vide, l'exécution n'est pas suspendue, 
- **
- **    et le caractère le plus ancien est extrait et retourné.
- ** 
- **	   Dans la grande majorité des cas la lecture du '\n' signifie que la ligne saisie a été complètement lue.
  **	   http://emmanuel-delahaye.developpez.com/tutoriels/c/notes-langage-c/?page=Page6
  **
  */
@@ -125,7 +113,6 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
-	ft_len_line(*line);
 	rest = ft_strchr(*line, '\n') + 1;
 	*line = *ft_strsplit(*line, '\n');
 	printf("rest = |%s|\n", rest);
