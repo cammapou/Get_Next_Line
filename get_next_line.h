@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE
-# define GET_NEXT_LINE
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -19,7 +19,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define BUF_SIZE 15
+# define BUFF_SIZE 15
 
 # include "./Libft/libft.h"
 

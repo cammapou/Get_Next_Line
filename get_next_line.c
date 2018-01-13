@@ -115,6 +115,7 @@ int		get_next_line(const int fd, char **line)
 	}
 	rest = ft_strchr(*line, '\n') + 1;
 	*line = *ft_strsplit(*line, '\n');
+	printf("%zu\n", ft_strlen(*line));
 	printf("rest = |%s|\n", rest);
 	return (0);
 }
