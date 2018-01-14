@@ -77,7 +77,7 @@
 {
 }*/
 
-int 	ft_check_valide(char **rest, char *line)
+int 	ft_cpy_split(char **rest, char *line)
 {
 	if (!*rest || !*line)
 		return (0);
@@ -127,7 +127,7 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
-	if (ft_check_valide(&rest, *line) == 1)
+	if (ft_cpy_split(&rest, *line) == 1)
 		return (1);
 	//rest = ft_strchr(*line, '\n') + 1;
 	//*line = *ft_strsplit(*line, '\n');
