@@ -77,14 +77,15 @@
 {
 }*/
 
-int 	ft_cpy_split(char **rest, char *line)
+int 	ft_cpy_split(char **rest, char ***line)
 {
 	if (!*rest || !*line)
 		return (0);
 	else
-		*rest = ft_strchr(line, '\n') + 1;
-		line = *ft_strsplit(line, '\n');
+		*rest = ft_strchr(**line, '\n') + 1;
+		**line = *ft_strsplit(**line, '\n');
 		//**line = ft_strjoin(**line, *rest);
+		printf("rest = |%s|\n", *rest);
 	return (1);
 }
 
@@ -127,10 +128,14 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
-	if (ft_cpy_split(&rest, *line) == 1)
+	if (ft_cpy_split(&rest, &line) == 1)
 		return (1);
+	//printf("buf = |%d|\n", BUF_SIZE);
+	printf("ret = |%d|\n", ret);
+	if (ret == BUFF_SIZE)
+		return (0);
 	//rest = ft_strchr(*line, '\n') + 1;
 	//*line = *ft_strsplit(*line, '\n');
-	//printf("rest = |%s|\n", rest);
+	printf("rest = |%s|\n", rest);
 	return (0);
 }
