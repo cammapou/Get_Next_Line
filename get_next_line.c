@@ -55,7 +55,7 @@
  ** 
  ** 3. Je crée une boucle pour lire le fichier j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
  ** 
- ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line caractere par caractere (faire attention au fuites memoire par la suite 
+ ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line (faire attention au fuites memoire par la suite 
  ** 	retrouver la tête pour pouvoir la free).
  **	 
  **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre a ma boucle de s'arreter a la rencontre
@@ -82,6 +82,7 @@ int 	ft_cpy_split(char **rest, char ***line)
 	if (!*rest || !**line)
 		return (0);
 	else
+
 		*rest = ft_strchr(**line, '\n') + 1;
 		**line = *ft_strsplit(**line, '\n');
 		//**line = ft_strjoin(**line, *rest);
@@ -115,8 +116,7 @@ int		get_next_line(const int fd, char **line)
 	int i;
 
 	i = 0;
-	ret = 0;
-	if (!line || fd < 0 || BUFF_SIZE < 0 || ret < 0)
+	if (!line || fd < 0 || BUFF_SIZE < 0)
 		return (-1);
 	ft_bzero(buff, BUFF_SIZE);
 	*line = ft_strnew(BUFF_SIZE);
@@ -128,12 +128,16 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
-	if (ft_cpy_split(&rest, &line) == 1)
-		return (1);
+	//while ((line[i]))
+	//{
+
+		if (ft_cpy_split(&rest, &line) == 1 )
+			return (1);
 	//printf("buf = |%d|\n", BUF_SIZE);
-	printf("ret = |%d|\n", ret);
-	if (ret == BUFF_SIZE)
-		return (0);
+		printf("ret = |%d|\n", ret);
+	//	i++;
+	//}
+	
 	//rest = ft_strchr(*line, '\n') + 1;
 	//*line = *ft_strsplit(*line, '\n');
 	printf("rest = |%s|\n", rest);
