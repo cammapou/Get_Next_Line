@@ -19,7 +19,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define BUFF_SIZE 20
+# define BUFF_SIZE 10
 
 # include "./Libft/libft.h"
 

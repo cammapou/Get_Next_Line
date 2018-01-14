@@ -76,14 +76,15 @@
 /*void	ft_allocation_memorie(char *line, static char *rest)
 {
 }*/
-int 	ft_check_valide(char **rest, char ***line)
+
+int 	ft_check_valide(char **rest, char *line)
 {
 	if (!*rest || !*line)
 		return (0);
 	else
-		*rest = ft_strchr(**line, '\n') + 1;
-		**line = *ft_strsplit(**line, '\n');
-		printf("rest = |%s|\n", *rest);
+		*rest = ft_strchr(line, '\n') + 1;
+		line = *ft_strsplit(line, '\n');
+		//**line = ft_strjoin(**line, *rest);
 	return (1);
 }
 
@@ -126,7 +127,7 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
-	if (ft_check_valide(&rest, &line) == 1)
+	if (ft_check_valide(&rest, *line) == 1)
 		return (1);
 	//rest = ft_strchr(*line, '\n') + 1;
 	//*line = *ft_strsplit(*line, '\n');
