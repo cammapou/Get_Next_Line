@@ -8,8 +8,13 @@ int main(int argc, char **argv)
 		ft_putendl("error");
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		return (-1);
-	get_next_line(fd, &line);
-	printf("|%s|\n", line);
+	while(get_next_line(fd, &line) == 1)
+	{
+		write(1, line, ft_strlen(line));
+		ft_putchar('\n');
+	}
+	//write(1, line, ft_strlen(line));
+	//printf("|%s|\n", line);
 	ft_strdel(&line);
 	close(fd);
 	return (0);

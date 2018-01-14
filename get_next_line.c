@@ -67,14 +67,27 @@
  **
  ** 8. extraire le rest de la variable "rest" est le revoyer (?) XXXII-G-2. Comportement interne fgets :
  **
- **	
- **	   http://emmanuel-delahaye.developpez.com/tutoriels/c/notes-langage-c/?page=Page6
+ **	9. ? faire une boucle avec ret ?
+ **	  
+ ** http://emmanuel-delahaye.developpez.com/tutoriels/c/notes-langage-c/?page=Page6
  **
  */
 
 /*void	ft_allocation_memorie(char *line, static char *rest)
 {
 }*/
+int 	ft_check_valide(char **rest, char ***line)
+{
+	if (!*rest || !*line)
+		return (0);
+	else
+		*rest = ft_strchr(**line, '\n') + 1;
+		**line = *ft_strsplit(**line, '\n');
+		printf("rest = |%s|\n", *rest);
+	return (1);
+}
+
+
 
 int 	ft_len_line(char *line)
 {
@@ -113,9 +126,10 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break;
 	}
-	rest = ft_strchr(*line, '\n') + 1;
-	*line = *ft_strsplit(*line, '\n');
-	printf("%zu\n", ft_strlen(*line));
-	printf("rest = |%s|\n", rest);
+	if (ft_check_valide(&rest, &line) == 1)
+		return (1);
+	//rest = ft_strchr(*line, '\n') + 1;
+	//*line = *ft_strsplit(*line, '\n');
+	//printf("rest = |%s|\n", rest);
 	return (0);
 }
