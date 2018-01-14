@@ -79,7 +79,7 @@
 
 int 	ft_cpy_split(char **rest, char ***line)
 {
-	if (!*rest || !*line)
+	if (!*rest || !**line)
 		return (0);
 	else
 		*rest = ft_strchr(**line, '\n') + 1;
@@ -91,7 +91,7 @@ int 	ft_cpy_split(char **rest, char ***line)
 
 
 
-int 	ft_len_line(char *line)
+int 	ft_len_rest(char *line)
 {
 	int i;
 	int len;
@@ -120,7 +120,7 @@ int		get_next_line(const int fd, char **line)
 		return (-1);
 	ft_bzero(buff, BUFF_SIZE);
 	*line = ft_strnew(BUFF_SIZE);
-	rest = ft_strnew(ft_len_line(*line));
+	rest = ft_strnew(ft_len_rest(*line));
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[ret] = '\0';
