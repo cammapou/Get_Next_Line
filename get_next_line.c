@@ -88,7 +88,31 @@
 {
 }*/
 
-int 	ft_len_line(char *line)
+int 	ft_cpy_split(char **rest, char ***line)
+{
+	static int nb;
+
+	nb = 0;
+	if (!*rest || !**line)
+		return (0);
+	if (nb == 0)
+	{
+		*rest = ft_strchr(**line, '\n') + 1;
+		//*rest = *ft_strsplit(*rest, '\n');
+		**line = *ft_strsplit(**line, '\n');
+		printf("rest = |%s|\n", *rest);
+		nb++;
+	}
+	/*if (nb == 1)
+	{	
+		**line = ft_strjoin(*rest, **line);
+	}
+	return (1);*/
+	return (1);
+	
+}
+
+int		ft_len_line(char *line)
 {
 	int i;
 	int len;
@@ -98,22 +122,32 @@ int 	ft_len_line(char *line)
 	while (--len > 0)
 	{
 		if (line[len] == '\n')
-			break;
+			break ;
 		i++;
 	}
 	return (i);
+}
+
+char		*ft_str_deljoin(char *s1, char *s2)
+{
+	char 	*str;
+
+	str = ft_strjoin(s1, s2);
+	ft_strdel(&s1);
+	//ft_strdel(&s2);
+	return (str);
 }
 
 int		get_next_line(const int fd, char **line)
 {
 	char			buff[BUFF_SIZE + 1];
 	static char		*rest;
-	int ret;
-	int i;
-
+	int				ret;
+	int				i;
+ 
 	i = 0;
 	ret = 0;
-	if (!line || fd < 0 || BUFF_SIZE < 0 || ret < 0)
+	if (!line || fd < 0 || BUFF_SIZE < 0)
 		return (-1);
 	ft_bzero(buff, BUFF_SIZE);
 	*line = ft_strnew(BUFF_SIZE);
@@ -121,13 +155,13 @@ int		get_next_line(const int fd, char **line)
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[ret] = '\0';
-		*line = ft_strjoin(*line, buff);
+		*line = ft_str_deljoin(*line, buff);
 		if (ft_strchr(buff, '\n'))
-			break;
+			break ;
 	}
-	ft_len_line(*line);
-	rest = ft_strchr(*line, '\n') + 1;
-	*line = *ft_strsplit(*line, '\n');
-	printf("rest = |%s|\n", rest);
+	//rest = ft_strchr(*line, '\n') + 1;
+	//*line = *ft_strsplit(*line, '\n');
+	if (ft_cpy_split(&rest, &line) == 1)
+		return (1);
 	return (0);
 }
