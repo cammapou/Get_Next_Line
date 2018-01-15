@@ -55,7 +55,7 @@
  ** 
  ** 3. Je crée une boucle pour lire le fichier j'ai déclaré une variable "ret" pour récupérer le nombre d'octet lus.
  ** 
- ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line caractere par caractere (faire attention au fuites memoire par la suite 
+ ** 4. Pendant la lecture j'utilise la fonction "ft_strjoin" pour permetre de copier correctement buf dans line (faire attention au fuites memoire par la suite 
  ** 	retrouver la tête pour pouvoir la free).
  **	 
  **	5. Je crée une condition dans la boucle de lecture, j'utilise la fonction "ft_strchr" dans le buffer pour permettre a ma boucle de s'arreter a la rencontre
@@ -67,20 +67,9 @@
  **
  ** 8. extraire le rest de la variable "rest" est le revoyer (?) XXXII-G-2. Comportement interne fgets :
  **
- **	   Les caractères saisis sont stockés dans le flux stdin. Lorsque l'on frappe la touche <enter>, le caractère '\n' est aussi placé dans stdin, 
- **	
- **	   et l'exécution reprend. Le caractère le plus ancien est alors extrait du flux et il est retourné. En cas d'erreur de lecture ou d'entrée 
- **
- **	   d'un caractère spécial dit 'de fin de fichier' la valeur EOF (int < 0) est retournée.
- **
- **    Ensuite, si on rappelle fgetc(), deux cas sont possibles. Soit le flux est vide, soit il ne l'est pas. Si le flux est vide, 
- ** 
- **    la fonction fgetc() suspend l'exécution, et on retrouve le comportement précédent. S'il n'est pas vide, l'exécution n'est pas suspendue, 
- **
- **    et le caractère le plus ancien est extrait et retourné.
- ** 
- **	   Dans la grande majorité des cas la lecture du '\n' signifie que la ligne saisie a été complètement lue.
- **	   http://emmanuel-delahaye.developpez.com/tutoriels/c/notes-langage-c/?page=Page6
+ **	9. ? faire une boucle avec ret ?
+ **	  
+ ** http://emmanuel-delahaye.developpez.com/tutoriels/c/notes-langage-c/?page=Page6
  **
  */
 
@@ -90,6 +79,7 @@
 
 int 	ft_cpy_split(char **rest, char ***line)
 {
+<<<<<<< HEAD
 	static int nb;
 
 	nb = 0;
@@ -113,6 +103,22 @@ int 	ft_cpy_split(char **rest, char ***line)
 }
 
 int		ft_len_line(char *line)
+=======
+	if (!*rest || !**line)
+		return (0);
+	else
+
+		*rest = ft_strchr(**line, '\n') + 1;
+		**line = *ft_strsplit(**line, '\n');
+		//**line = ft_strjoin(**line, *rest);
+		printf("rest = |%s|\n", *rest);
+	return (1);
+}
+
+
+
+int 	ft_len_rest(char *line)
+>>>>>>> 8b28cdf9083fd4671e865a5edc2d5808f3fc75c3
 {
 	int i;
 	int len;
@@ -146,12 +152,15 @@ int		get_next_line(const int fd, char **line)
 	int				i;
  
 	i = 0;
+<<<<<<< HEAD
 	ret = 0;
+=======
+>>>>>>> 8b28cdf9083fd4671e865a5edc2d5808f3fc75c3
 	if (!line || fd < 0 || BUFF_SIZE < 0)
 		return (-1);
 	ft_bzero(buff, BUFF_SIZE);
 	*line = ft_strnew(BUFF_SIZE);
-	rest = ft_strnew(ft_len_line(*line));
+	rest = ft_strnew(ft_len_rest(*line));
 	while ((ret = read(fd, buff, BUFF_SIZE)))
 	{
 		buff[ret] = '\0';
@@ -159,9 +168,25 @@ int		get_next_line(const int fd, char **line)
 		if (ft_strchr(buff, '\n'))
 			break ;
 	}
+<<<<<<< HEAD
 	//rest = ft_strchr(*line, '\n') + 1;
 	//*line = *ft_strsplit(*line, '\n');
 	if (ft_cpy_split(&rest, &line) == 1)
 		return (1);
+=======
+	//while ((line[i]))
+	//{
+
+		if (ft_cpy_split(&rest, &line) == 1 )
+			return (1);
+	//printf("buf = |%d|\n", BUF_SIZE);
+		printf("ret = |%d|\n", ret);
+	//	i++;
+	//}
+	
+	//rest = ft_strchr(*line, '\n') + 1;
+	//*line = *ft_strsplit(*line, '\n');
+	printf("rest = |%s|\n", rest);
+>>>>>>> 8b28cdf9083fd4671e865a5edc2d5808f3fc75c3
 	return (0);
 }
