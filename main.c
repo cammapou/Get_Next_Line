@@ -1,23 +1,22 @@
 #include "get_next_line.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char ** argv)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
+
+	fd = 257;
 	if (argc != 2)
-		ft_putendl("error");
+		return (0);
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		return (-1);
-	while(get_next_line(fd, &line) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
-		//get_next_line(fd, &line);
-		printf("line = |%s|\n", line);
-		//write(1, line, ft_strlen(line));
-		//ft_putchar('\n');
+		write(1, line, strlen(line));
+		write(1, "\n", 1);
+		free(line);						
 	}
-	//write(1, line, ft_strlen(line));
-	//printf("|%s|\n", line);
-	ft_strdel(&line);
+	printf("%d\n", get_next_line(fd, &line));
 	close(fd);
 	return (0);
 }
