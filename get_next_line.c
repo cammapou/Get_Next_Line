@@ -16,10 +16,8 @@
  ** 
  **	--------------------------------------------------------------------------
  **
- ** 						MON PROGRAMME GET NEXT LINE 
+ ** 						GET_NEXT_LINE 
  */
-
-#include "get_next_line.h"
 
 int			ft_len(char *str, char c)
 {
@@ -48,12 +46,12 @@ void		ft_sub(char **line, char **str)
 int			get_next_line(const int fd, char **line)
 {
 	char					buff[BUFF_SIZE + 1];
-	static	char			*str[256];
+	static	char			*str[OPEN_MAX];
 	char					*tmp;
 	int						ret;
 
 	ret = 0;
-	if (line == NULL || fd < 0 || BUFF_SIZE < 0 || read(fd, "", 0) < 0)
+	if (line == NULL || fd < 0 || BUFF_SIZE < 0 || read(fd, "", 0) < 0 || fd > OPEN_MAX)
 		return (-1);
 	if (!str[fd])
 		str[fd] = ft_strnew(1);

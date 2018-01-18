@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-
+#include <stdio.h>
 int	main(int argc, char ** argv)
 {
 	int		fd;
@@ -12,8 +12,8 @@ int	main(int argc, char ** argv)
 		return (-1);
 	while (get_next_line(fd, &line) == 1)
 	{
-		write(1, line, strlen(line));
-		write(1, "\n", 1);
+		printf("%s\n", line);
+		//write(1, "\n", 1);
 		free(line);						
 	}
 	printf("%d\n", get_next_line(fd, &line));
