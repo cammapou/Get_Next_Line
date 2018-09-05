@@ -15,7 +15,7 @@
 
 # include <fcntl.h>
 # define OPEN_MAX 256
-# define BUFF_SIZE 400
+# define BUFF_SIZE 2
 
 # include "libft/libft.h"
 

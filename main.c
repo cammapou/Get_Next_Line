@@ -13,10 +13,12 @@ int	main(int argc, char ** argv)
 	while (get_next_line(fd, &line) == 1)
 	{
 		printf("%s\n", line);
-		//write(1, "\n", 1);
+		write(1, "\n", 1);
 		free(line);						
 	}
 	printf("%d\n", get_next_line(fd, &line));
 	close(fd);
+	while (1)
+	{}
 	return (0);
 }

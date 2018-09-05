@@ -6,18 +6,11 @@
 /*   By: cammapou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/03 11:47:43 by cammapou          #+#    #+#             */
-/*   Updated: 2018/01/15 16:31:36 by cammapou         ###   ########.fr       */
+/*   Updated: 2018/06/14 12:05:08 by cammapou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
- 
- /*
- ** 
- **	--------------------------------------------------------------------------
- **
- ** 						GET_NEXT_LINE 
- */
 
 int			ft_len(char *str, char c)
 {
@@ -45,19 +38,20 @@ void		ft_sub(char **line, char **str)
 
 int			get_next_line(const int fd, char **line)
 {
-	char					buff[BUFF_SIZE + 1];
+	char					buff[BUF_SIZE + 1];
 	static	char			*str[OPEN_MAX];
 	char					*tmp;
 	int						ret;
 
 	ret = 0;
-	if (line == NULL || fd < 0 || BUFF_SIZE < 0 || read(fd, "", 0) < 0 || fd > OPEN_MAX)
+	if (line == NULL || fd < 0 || BUF_SIZE < 0 || read(fd, "", 0) < 0 ||
+			fd > OPEN_MAX)
 		return (-1);
 	if (!str[fd])
 		str[fd] = ft_strnew(1);
 	while (!(ft_strchr(str[fd], '\n')))
 	{
-		ret = read(fd, buff, BUFF_SIZE);
+		ret = read(fd, buff, BUF_SIZE);
 		if (ret == 0)
 			break ;
 		buff[ret] = '\0';
