@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cammapou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 11:47:57 by cammapou          #+#    #+#             */
-/*   Updated: 2018/01/15 16:31:31 by cammapou         ###   ########.fr       */
+/*   Created: 2017/11/09 14:52:46 by cammapou          #+#    #+#             */
+/*   Updated: 2017/11/09 15:19:15 by cammapou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# define OPEN_MAX 256
-# define BUF_SIZE 10
+char	*ft_strcat(char *dest, const char *src)
+{
+	int i;
+	int j;
 
-# include "libft/libft.h"
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	j = 0;
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

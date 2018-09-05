@@ -15,9 +15,9 @@
 
 # include <fcntl.h>
 # define OPEN_MAX 256
-# define BUF_SIZE 10
+# define BUF_SIZE 2
 
-# include "libft/libft.h"
+# include "libft.h"
 
 int		get_next_line(const int fd, char **line);
 

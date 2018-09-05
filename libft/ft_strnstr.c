@@ -1,24 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cammapou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 11:47:57 by cammapou          #+#    #+#             */
-/*   Updated: 2018/01/15 16:31:31 by cammapou         ###   ########.fr       */
+/*   Created: 2017/11/09 18:41:06 by cammapou          #+#    #+#             */
+/*   Updated: 2017/11/23 12:38:39 by cammapou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# define OPEN_MAX 256
-# define BUF_SIZE 10
+char	*ft_strnstr(const char *s1, const char *s2, size_t len)
+{
+	size_t		i;
+	size_t		j;
+	size_t		c;
+	char		*s;
 
-# include "libft/libft.h"
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	s = (char*)s1;
+	i = 0;
+	j = 0;
+	if (s2[i] == '\0')
+		return (&s[i]);
+	while (s[i] != '\0' && i < len)
+	{
+		j = i;
+		c = 0;
+		while (s[j] == s2[c] && i + c < len)
+		{
+			j++;
+			c++;
+			if (s2[c] == '\0')
+				return (&s[i]);
+		}
+		i++;
+	}
+	return (NULL);
+}

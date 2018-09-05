@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cammapou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 11:47:57 by cammapou          #+#    #+#             */
-/*   Updated: 2018/01/15 16:31:31 by cammapou         ###   ########.fr       */
+/*   Created: 2017/11/20 16:05:59 by cammapou          #+#    #+#             */
+/*   Updated: 2017/11/21 11:36:19 by cammapou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# define OPEN_MAX 256
-# define BUF_SIZE 10
+t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+{
+	t_list	*new;
 
-# include "libft/libft.h"
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	if (!lst || !f)
+		return (NULL);
+	if (!(new = (t_list*)malloc(sizeof(lst))))
+		return (NULL);
+	if (lst)
+	{
+		new = f(lst);
+		new->next = ft_lstmap(lst->next, f);
+		return (new);
+	}
+	return (NULL);
+}

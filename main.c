@@ -14,11 +14,8 @@ int	main(int argc, char ** argv)
 	{
 		printf("%s\n", line);
 		write(1, "\n", 1);
-		free(line);						
+		free(line);
 	}
-	printf("%d\n", get_next_line(fd, &line));
 	close(fd);
-	while (1)
-	{}
 	return (0);
 }

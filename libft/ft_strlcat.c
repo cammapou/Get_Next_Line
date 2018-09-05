@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cammapou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/03 11:47:57 by cammapou          #+#    #+#             */
-/*   Updated: 2018/01/15 16:31:31 by cammapou         ###   ########.fr       */
+/*   Created: 2017/11/13 15:21:19 by cammapou          #+#    #+#             */
+/*   Updated: 2017/11/13 19:29:26 by cammapou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <fcntl.h>
-# define OPEN_MAX 256
-# define BUF_SIZE 10
+size_t		ft_strlcat(char *dest, const char *src, size_t nb)
+{
+	size_t	dst_len;
+	size_t	src_len;
 
-# include "libft/libft.h"
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	dst_len = ft_strlen(dest);
+	src_len = ft_strlen(src);
+	if (nb <= dst_len)
+		return (nb + src_len);
+	else
+		ft_strncat(dest, src, nb - dst_len - 1);
+	return (dst_len + src_len);
+}
